@@ -74,6 +74,6 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         load()->func('logging');
         logging_run('doPageunionid');
 
-        $this->result(0, '', array('type'=>1,'mes'=>'2010:10:10','name'=>'Hongch','mes1'=>'联系客服回复：1','mes2'=>'全天客服回复：2')); //  响应json串
+        $this->result(0, '', array('show'=>2,'show4'=>4,'type'=>1,'mes'=>'2010:10:10','name'=>'Hongch','mes1'=>'联系客服回复：1','mes2'=>'全天客服回复：2')); //  响应json串
     }
 }
