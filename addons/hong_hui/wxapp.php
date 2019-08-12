@@ -69,6 +69,9 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
     public function doPageCheck(){
         load()->func('logging');
         $this->result(0, '', array('status'=>'success')); //  响应json串
-
+    }
+    public function doPageunionid(){
+        load()->func('logging');
+        $this->result(0, '', array('type'=>'1','mes'=>'2010:10:10','name'=>'Hongch','mes1'=>'联系客服回复：1','全天客服回复：2')); //  响应json串
     }
 }
