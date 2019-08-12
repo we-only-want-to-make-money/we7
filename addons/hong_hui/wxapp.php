@@ -58,6 +58,14 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $this->result(0, '', array('lunimg'=>'https://ci.xiaohongshu.com/daeb8bca-40d6-5dee-8fe9-54e8dec0a9d6?imageView2/2/w/1080/format/jpg',
             'video'=>'https://v.xiaohongshu.com/23237a577db9f8c168c49652da23b68b06656cfa?sign=35424ab0553a467a449508a013dc69d7&t=5d52de80','size'=>'9')); //  响应json串
     }
+    public function doPageYunvideo(){
+        $this->result(0, '', array('lunimg'=>'https://ci.xiaohongshu.com/daeb8bca-40d6-5dee-8fe9-54e8dec0a9d6?imageView2/2/w/1080/format/jpg',
+            'video'=>'https://v.xiaohongshu.com/23237a577db9f8c168c49652da23b68b06656cfa?sign=35424ab0553a467a449508a013dc69d7&t=5d52de80','size'=>'9')); //  响应json串
+    }
+    public function doPageArt(){
+        load()->func('logging');
+        $this->result(0, '', array('art'=>'哈哈哈哈哈','artlist'=>['1','2','3'])); //  响应json串
+    }
     public function doPageCheck(){
         load()->func('logging');
         $this->result(0, '', array('status'=>'success')); //  响应json串
