@@ -25,6 +25,9 @@ if (!empty($_W['uniacid'])) {
 }
 $site = WeUtility::createModuleWxapp($entry['module']);
 $method = 'doPage' . ucfirst($entry['do']);
+load()->func('logging');
+logging_run('wxapp');
+
 if(!is_error($site)) {
 	$site->appid = $appid;
 	$site->version = $version;
