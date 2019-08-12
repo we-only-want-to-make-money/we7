@@ -33,4 +33,9 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $this->result(0, '', array('lunimg'=>$lunimg,'wenimg'=>$wenimg)); //  响应json串
 
     }
+    public function doPageCheck(){
+        load()->func('logging');
+        $this->result(0, '', array('status'=>'success')); //  响应json串
+
+    }
 }
