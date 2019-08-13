@@ -84,7 +84,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $artlist=json_decode($txt);
         logging_run('artlist:'.$artlist);
 
-        if(!$artlist){
+        if(is_string($artlist)){
             $art=$txt;
             $artlist=[];
         }else{
