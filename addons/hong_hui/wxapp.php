@@ -19,7 +19,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $session_id=$_W['session_id'];//round(microtime(true) * 1000);
 
         exec('cd /home/wwwroot/default/redbook');
-        exec('php /home/wwwroot/default/redbook/yii redbook start $session_id $url 0',$array);
+        exec('php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 0',$array);
         logging_run('exec:'.'php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 0');
         logging_run('exec:'.json_encode($array));
 
