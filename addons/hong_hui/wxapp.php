@@ -50,7 +50,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         logging_run('doPageYunimage:'.json_encode($_GPC));
         $url=$_GPC['url'];
         $session_id=$_W['session_id'];//round(microtime(true) * 1000);
-        exec('php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 0',$array);
+        exec('php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 2',$array);
         $isExist=file_exists("/home/wwwroot/default/downloads/".$session_id.".txt");
         if($isExist){
             $myfile = fopen("/home/wwwroot/default/downloads/".$session_id.".txt", "r");
@@ -66,8 +66,20 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
             'video'=>'https://v.xiaohongshu.com/23237a577db9f8c168c49652da23b68b06656cfa?sign=35424ab0553a467a449508a013dc69d7&t=5d52de80','size'=>'9')); //  响应json串
     }
     public function doPageArt(){
+        global  $_GPC,$_W;
         load()->func('logging');
-        $this->result(0, '', array('art'=>'哈哈哈哈哈','artlist'=>['1','2','3'])); //  响应json串
+        logging_run('doPageArt:'.json_encode($_GPC));
+        $url=$_GPC['url'];
+        $session_id=$_W['session_id'];//round(microtime(true) * 1000);
+        exec('php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 1',$array);
+        $isExist=file_exists("/home/wwwroot/default/downloads/".$session_id.".txt");
+        if($isExist){
+            $myfile = fopen("/home/wwwroot/default/downloads/".$session_id.".txt", "r");
+            $txt= fread($myfile,filesize("/home/wwwroot/default/downloads/".$session_id.".txt"));
+            fclose($myfile);
+        }
+        logging_run('txt:'.json_encode($txt));
+        $this->result(0, '', array('art'=>$txt,'artlist'=>[$txt])); //  响应json串
     }
     public function doPageCheck(){
         load()->func('logging');
