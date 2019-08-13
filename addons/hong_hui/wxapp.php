@@ -86,7 +86,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
 
         if(is_string($artlist)){
             $art=$artlist;
-            $artlist=[];
+            $artlist=[$art];
         }else{
             foreach ($artlist as $item){
                 $art.=$item.PHP_EOL;
