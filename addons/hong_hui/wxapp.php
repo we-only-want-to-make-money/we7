@@ -57,7 +57,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
             'https://ci.xiaohongshu.com/daeb8bca-40d6-5dee-8fe9-54e8dec0a9d6?imageView2/2/w/1080/format/jpg',
             'https://ci.xiaohongshu.com/daeb8bca-40d6-5dee-8fe9-54e8dec0a9d6?imageView2/2/w/1080/format/jpg',
             'https://ci.xiaohongshu.com/daeb8bca-40d6-5dee-8fe9-54e8dec0a9d6?imageView2/2/w/1080/format/jpg',];
-        $this->result(0, '', array('lunimg'=>$lunimg,'wenimg'=>$wenimg)); //  响应json串
+        $this->result(0, '', array('lunimg'=>json_decode($txt),'wenimg'=>json_decode($txt))); //  响应json串
 
     }
     public function doPageYunimage(){
