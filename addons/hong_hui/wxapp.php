@@ -24,8 +24,12 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         //logging_run('exec:'.json_encode($array));
         $sleep_time = 50000;//多长时间执行一次
         $isExist=file_exists("/home/wwwroot/default/downloads/".$session_id.".txt");
-
-        while(!$isExist){
+        if($isExist){
+            $myfile = fopen("/home/wwwroot/default/downloads/".$session_id.".txt", "r");
+            $txt= fread($myfile,filesize("/home/wwwroot/default/downloads/".$session_id.".txt"));
+            fclose($myfile);
+        }
+        /*while(!$isExist){
             logging_run('isExist:'.$isExist);
             $isExist=file_exists("/home/wwwroot/default/downloads/".$session_id.".txt");
             if($isExist){
@@ -34,7 +38,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
                 fclose($myfile);
             }
             usleep($sleep_time);//等待时间，进行下一次操作。
-        }
+        }*/
         logging_run('txt:'.json_encode($txt));
 
         $lunimg=['https://ci.xiaohongshu.com/daeb8bca-40d6-5dee-8fe9-54e8dec0a9d6?imageView2/2/w/1080/format/jpg',
