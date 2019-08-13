@@ -85,7 +85,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         logging_run('artlist:'.$artlist);
 
         if(is_string($artlist)){
-            $art=$txt;
+            $art=$artlist;
             $artlist=[];
         }else{
             foreach ($artlist as $item){
