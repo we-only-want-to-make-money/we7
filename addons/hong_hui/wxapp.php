@@ -80,14 +80,19 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
             $txt= fread($myfile,filesize("/home/wwwroot/default/downloads/".$session_id.".txt"));
             fclose($myfile);
         }
-        $txt=json_decode($txt);
         $art="";
-        foreach ($txt as $item){
-            $art.=$item.PHP_EOL;
+        $artlist=json_decode($txt);
+        if(!$artlist){
+            $art=$txt;
+            $artlist=[];
+        }else{
+            foreach ($artlist as $item){
+                $art.=$item.PHP_EOL;
+            }
         }
         logging_run('art:'.$art);
 
-        $this->result(0, '', array('art'=>$art,'artlist'=>$txt)); //  响应json串
+        $this->result(0, '', array('art'=>$art,'artlist'=>$artlist)); //  响应json串
     }
     public function doPageCheck(){
         load()->func('logging');
