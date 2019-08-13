@@ -15,6 +15,8 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         global  $_GPC,$_W;
         load()->func('logging');
         logging_run('doPageImage:'.json_encode($_GPC));
+        logging_run('doPageImage:'.json_encode($_W));
+
         $url=substr($_GPC['url'],strpos($_GPC['url'], 'http'));
         $session_id=$_W['session_id'];//round(microtime(true) * 1000);
         exec('php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 0',$array);
