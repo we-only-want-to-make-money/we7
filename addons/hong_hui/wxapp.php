@@ -12,9 +12,13 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
     public function doPageTest() {
     }
     public function doPageImage(){
-        global  $_GPC;
+        global  $_GPC,$_W;
         load()->func('logging');
         logging_run('doPageImage:'.json_encode($_GPC));
+        $url=$_GPC['url'];
+        $session_id=$_W['session_id'];//round(microtime(true) * 1000);
+        exec('cd /home/wwwroot/default/redbook');
+        exec('php yii redbook start $session_id $url');
         $lunimg=['https://ci.xiaohongshu.com/daeb8bca-40d6-5dee-8fe9-54e8dec0a9d6?imageView2/2/w/1080/format/jpg',
             'https://ci.xiaohongshu.com/daeb8bca-40d6-5dee-8fe9-54e8dec0a9d6?imageView2/2/w/1080/format/jpg',
             'https://ci.xiaohongshu.com/daeb8bca-40d6-5dee-8fe9-54e8dec0a9d6?imageView2/2/w/1080/format/jpg',
