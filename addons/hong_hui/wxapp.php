@@ -81,7 +81,11 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
             fclose($myfile);
         }
         logging_run('txt:'.json_encode($txt));
-        $this->result(0, '', array('art'=>$txt,'artlist'=>[$txt])); //  响应json串
+        $art="";
+        foreach ($txt as $item){
+            $art.=$item.PHP_EOL;
+        }
+        $this->result(0, '', array('art'=>$art,'artlist'=>$txt)); //  响应json串
     }
     public function doPageCheck(){
         load()->func('logging');
