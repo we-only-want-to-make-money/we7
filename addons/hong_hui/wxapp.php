@@ -18,14 +18,15 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $url=$_GPC['url'];
         $session_id=$_W['session_id'];//round(microtime(true) * 1000);
 
-        exec('cd /home/wwwroot/default/redbook');
+        //exec('cd /home/wwwroot/default/redbook');
         exec('php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 0',$array);
-        logging_run('exec:'.'php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 0');
-        logging_run('exec:'.json_encode($array));
+        //logging_run('exec:'.'php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 0');
+        //logging_run('exec:'.json_encode($array));
         $sleep_time = 50000;//多长时间执行一次
         $isExist=file_exists("/home/wwwroot/default/downloads/".$session_id.".txt");
 
         while(!$isExist){
+            logging_run('isExist:'.$isExist);
             $isExist=file_exists("/home/wwwroot/default/downloads/".$session_id.".txt");
             if($isExist){
                 $myfile = fopen("/home/wwwroot/default/downloads/".$session_id.".txt", "r");
