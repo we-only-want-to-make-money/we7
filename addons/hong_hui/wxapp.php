@@ -15,7 +15,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         global  $_GPC,$_W;
         load()->func('logging');
         logging_run('doPageImage:'.json_encode($_GPC));
-        $url=$_GPC['url'];
+        $url=substr($_GPC['url'],strpos($_GPC['url'], 'http'));
         $session_id=$_W['session_id'];//round(microtime(true) * 1000);
         exec('php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 0',$array);
         logging_run("command:".'php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 2');
@@ -34,7 +34,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         global  $_GPC,$_W;
         load()->func('logging');
         logging_run('doPageYunimage:'.json_encode($_GPC));
-        $url=$_GPC['url'];
+        $url=substr($_GPC['url'],strpos($_GPC['url'], 'http'));
         $session_id=$_W['session_id'];//round(microtime(true) * 1000);
         exec('php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 0',$array);
         $isExist=file_exists("/home/wwwroot/default/downloads/".$session_id.".txt");
@@ -71,7 +71,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         global  $_GPC,$_W;
         load()->func('logging');
         logging_run('doPageArt:'.json_encode($_GPC));
-        $url=$_GPC['url'];
+        $url=substr($_GPC['url'],strpos($_GPC['url'], 'http'));
         $session_id=$_W['session_id'];//round(microtime(true) * 1000);
         exec('php /home/wwwroot/default/redbook/yii redbook start '.$session_id.' '.$url.' 1',$array);
         $isExist=file_exists("/home/wwwroot/default/downloads/".$session_id.".txt");
