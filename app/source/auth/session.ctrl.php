@@ -86,7 +86,7 @@ if ($do == 'openid') {
 			    'uid'=>$uid,
                 'openid' => $oauth['openid'],
                 'unionid' => $oauth['unionid'],
-                'freetimes' => 5,
+                'freetimes' => 0,
                 'exprietime'=>TIMESTAMP,
                 'type'=>2,
                 'acid' => $_W['acid'],

@@ -163,18 +163,18 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
                     );
                     pdo_insert('mc_members', $member);
                     $fans_update['uid'] = pdo_insertid();
-                    $params=array('uid' => $fans['uid']);
-                    $result = pdo_get('fans_redbook_vip', $params);
-                    if (!empty($result)) {
-                        $type=$result['type'];
-                        $freetimes=$result['freetimes'];
-                        $exprietime=$result['exprietime'];
-                        $exprieDate=date("Y-m-d ", $exprietime);
-                        if($type==2){
-                            $mes=$exprieDate;
-                        }else if($type==1){
-                            $mes=$freetimes;
-                        }
+                }
+                $params=array('uid' => $fans['uid']);
+                $result = pdo_get('fans_redbook_vip', $params);
+                if (!empty($result)) {
+                    $type=$result['type'];
+                    $freetimes=$result['freetimes'];
+                    $exprietime=$result['exprietime'];
+                    $exprieDate=date("Y-m-d ", $exprietime);
+                    if($type==2){
+                        $mes=$exprieDate;
+                    }else if($type==1){
+                        $mes=$freetimes;
                     }
                 }
                 pdo_update('mc_mapping_fans', $fans_update, array('fanid' => $fans['fanid']));
