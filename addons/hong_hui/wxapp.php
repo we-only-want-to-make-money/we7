@@ -109,6 +109,8 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
     }
     public function doPageunionid(){
         global  $_GPC,$_W;
+        $type=1;
+        $mes=5;
         load()->func('logging');
         logging_run('doPageunionid');
         $encryptedData=$_GPC['encryptedData'];
