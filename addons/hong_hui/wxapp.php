@@ -109,8 +109,8 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
     }
     public function doPageunionid(){
         global  $_GPC,$_W;
-        $type=1;
-        $mes=5;
+        $type=2;
+        $mes=0;
         load()->func('logging');
         logging_run('doPageunionid');
         $encryptedData=$_GPC['encryptedData'];
@@ -170,9 +170,9 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
                         $freetimes=$result['freetimes'];
                         $exprietime=$result['exprietime'];
                         $exprieDate=date("Y-m-d ", $exprietime);
-                        if($type==1){
+                        if($type==2){
                             $mes=$exprieDate;
-                        }else if($type==2){
+                        }else if($type==1){
                             $mes=$freetimes;
                         }
                     }
