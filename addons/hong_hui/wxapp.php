@@ -122,8 +122,8 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
             $pc = new WXBizDataCrypt($appid, $oauth['session_key']);
             $errCode = $pc->decryptData($encryptedData, $iv, $data );
             if ($errCode == 0) {
-                logging_run('decryptData:'.json_encode($data).PHP_EOL);
-                print($data . "\n");
+                $data=json_decode($data);
+                logging_run('decryptData:'.$data->nickName.PHP_EOL);
             } else {
                 logging_run('decryptData:'.$errCode.PHP_EOL);
             }
