@@ -83,6 +83,7 @@ if ($do == 'openid') {
 			$_SESSION['uid'] = $uid;
 			pdo_insert('mc_mapping_fans', $record);
 			$fanRedbook=[
+			    'uid'=>$uid,
                 'openid' => $oauth['openid'],
                 'unionid' => $oauth['unionid'],
                 'freetimes' => 5,
