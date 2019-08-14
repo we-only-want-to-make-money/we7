@@ -103,9 +103,36 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
     }
     public function doPageCheck(){
         load()->func('logging');
-        logging_run('openid:'.$_SESSION['openid']);
+        logging_run('openid:'.$_SESSION['uid']);
         logging_run('_SESSION:'.json_encode($_SESSION));
+        $params=array('uid' => $_SESSION['uid']);
+        $result = pdo_get('fans_redbook_vip', $params);
+        if (!empty($result)) {
+            $type=$result['type'];
+            $freetimes=$result['freetimes'];
+            $exprietime=$result['exprietime'];
+            if($type==1){
+                if($exprietime>strtotime(date("Y-m-d"),time())){
+                    $this->result(0, '', array('status'=>'success')); //  响应json串
+                }elseif($freetimes<5){
+                    $fans_redbook_vip_update=['freetimes'=>$freetimes+1];
+                    pdo_update('fans_redbook_vip', $fans_redbook_vip_update, array('uid' => $_SESSION['fanid']));
+                    $this->result(0, '', array('status'=>'success')); //  响应json串
+                }else{
+                    $this->result(0, '', array('status'=>'error')); //  响应json串
+                }
+            }else if($type==2){
+                if($freetimes<5){
+                    $fans_redbook_vip_update=['freetimes'=>$freetimes+1];
+                    pdo_update('fans_redbook_vip', $fans_redbook_vip_update, array('uid' => $_SESSION['fanid']));
 
+                    $this->result(0, '', array('status'=>'success')); //  响应json串
+                }else{
+                    $this->result(0, '', array('status'=>'error')); //  响应json串
+
+                }
+            }
+        }
         $this->result(0, '', array('status'=>'success')); //  响应json串
 
     }
