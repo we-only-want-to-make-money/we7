@@ -103,9 +103,28 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $this->result(0, '', array('status'=>'success')); //  响应json串
     }
     public function doPageunionid(){
+        global  $_GPC,$_W;
         load()->func('logging');
         logging_run('doPageunionid');
-
+        $encryptedData=$_GPC['encryptedData'];
+        $iv=$_GPC['iv'];
+        $appid=$_W['account']['key'];
+        logging_run('appid:'.$appid);
+        $account_api = WeAccount::createByUniacid();
+        $oauth = $account_api->getOauthInfo($_GPC['code']);
+        if (!empty($oauth) && !is_error($oauth)) {
+            $_SESSION['openid'] = $oauth['openid'];
+            $_SESSION['session_key'] = $oauth['session_key'];
+            $fans = mc_fansinfo($oauth['openid']);
+            $pc = new WXBizDataCrypt($appid, $oauth['session_key']);
+            $errCode = $pc->decryptData($encryptedData, $iv, $data );
+            if ($errCode == 0) {
+                logging_run('decryptData:'.json_encode($data).PHP_EOL);
+                print($data . "\n");
+            } else {
+                logging_run('decryptData:'.$errCode.PHP_EOL);
+            }
+        }
         $this->result(0, '', array('show'=>2,'show4'=>4,'type'=>1,'mes'=>'2010:10:10','name'=>'Hongch','mes1'=>'联系客服回复：1','mes2'=>'全天客服回复：2')); //  响应json串
     }
 }
