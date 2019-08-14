@@ -103,7 +103,9 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
     }
     public function doPageCheck(){
         load()->func('logging');
+        logging_run('openid:'.$_SESSION['openid']);
         $this->result(0, '', array('status'=>'success')); //  响应json串
+
     }
     public function doPageunionid(){
         global  $_GPC,$_W;
