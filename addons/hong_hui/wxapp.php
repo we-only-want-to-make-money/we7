@@ -103,8 +103,6 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
     }
     public function doPageCheck(){
         load()->func('logging');
-        logging_run('openid:'.$_SESSION['uid']);
-        logging_run('_SESSION:'.json_encode($_SESSION));
         $params=array('uid' => $_SESSION['uid']);
         $result = pdo_get('fans_redbook_vip', $params);
         if (!empty($result)) {
@@ -113,21 +111,28 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
             $exprietime=$result['exprietime'];
             if($type==1){
                 if($exprietime>strtotime(date("Y-m-d"),time())){
+                    logging_run('check:'."1");
                     $this->result(0, '', array('status'=>'success')); //  响应json串
                 }elseif($freetimes<5){
+                    logging_run('check:'."2");
                     $fans_redbook_vip_update=['freetimes'=>$freetimes+1];
                     pdo_update('fans_redbook_vip', $fans_redbook_vip_update, array('uid' => $_SESSION['fanid']));
                     $this->result(0, '', array('status'=>'success')); //  响应json串
                 }else{
+                    logging_run('check:'."3");
                     $this->result(0, '', array('status'=>'error')); //  响应json串
                 }
             }else if($type==2){
                 if($freetimes<5){
+                    logging_run('check:'."4");
+
                     $fans_redbook_vip_update=['freetimes'=>$freetimes+1];
                     pdo_update('fans_redbook_vip', $fans_redbook_vip_update, array('uid' => $_SESSION['fanid']));
 
                     $this->result(0, '', array('status'=>'success')); //  响应json串
                 }else{
+                    logging_run('check:'."5");
+
                     $this->result(0, '', array('status'=>'error')); //  响应json串
 
                 }
