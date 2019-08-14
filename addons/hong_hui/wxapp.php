@@ -122,7 +122,45 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
             $pc = new WXBizDataCrypt($appid, $oauth['session_key']);
             $errCode = $pc->decryptData($encryptedData, $iv, $data );
             if ($errCode == 0) {
-                $data=json_decode($data);
+                $userinfo=json_decode($data,true);
+                $fans_update = array(
+                    'nickname' => $userinfo['nickName'],
+                    'unionid' => $userinfo['unionId'],
+                    'tag' => base64_encode(iserializer(array(
+                        'subscribe' => 1,
+                        'openid' => $userinfo['openId'],
+                        'nickname' => $userinfo['nickName'],
+                        'sex' => $userinfo['gender'],
+                        'language' => $userinfo['language'],
+                        'city' => $userinfo['city'],
+                        'province' => $userinfo['province'],
+                        'country' => $userinfo['country'],
+                        'headimgurl' => $userinfo['avatarUrl'],
+                    ))),
+                );
+                $member = mc_fetch($fans['uid']);
+                if (!empty($member)) {
+                    pdo_update('mc_members', array('nickname' => $userinfo['nickName'], 'avatar' => $userinfo['avatarUrl'], 'gender' => $userinfo['gender']), array('uid' => $fans['uid']));
+                } else {
+                    $default_groupid = pdo_fetchcolumn('SELECT groupid FROM ' .tablename('mc_groups') . ' WHERE uniacid = :uniacid AND isdefault = 1', array(':uniacid' => $_W['uniacid']));
+                    $member = array(
+                        'uniacid' => $_W['uniacid'],
+                        'email' => md5($_SESSION['openid']).'@we7.cc',
+                        'salt' => random(8),
+                        'groupid' => $default_groupid,
+                        'createtime' => TIMESTAMP,
+                        'password' => md5($userinfo['openId'] . $member['salt'] . $_W['config']['setting']['authkey']),
+                        'nickname' => $userinfo['nickName'],
+                        'avatar' => $userinfo['avatarUrl'],
+                        'gender' => $userinfo['gender'],
+                        'nationality' => '',
+                        'resideprovince' => '',
+                        'residecity' => '',
+                    );
+                    pdo_insert('mc_members', $member);
+                    $fans_update['uid'] = pdo_insertid();
+                }
+                pdo_update('mc_mapping_fans', $fans_update, array('fanid' => $fans['fanid']));
                 logging_run('decryptData:'.$data->nickName.PHP_EOL);
             } else {
                 logging_run('decryptData:'.$errCode.PHP_EOL);
