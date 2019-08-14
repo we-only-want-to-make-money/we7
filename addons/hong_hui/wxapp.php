@@ -172,10 +172,10 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
                             $mes=$freetimes;
                         }
                     }
-                    $this->result(0, '', array('show'=>2,'show4'=>4,'type'=>$type,'mes'=>$mes,'name'=>$userinfo['nickName'],'mes1'=>'联系客服回复：1','mes2'=>'全天客服回复：2')); //  响应json串
                 }
                 pdo_update('mc_mapping_fans', $fans_update, array('fanid' => $fans['fanid']));
-                logging_run('decryptData:'.$data->nickName.PHP_EOL);
+                logging_run('decryptData:'.$data.PHP_EOL);
+                $this->result(0, '', array('show'=>2,'show4'=>4,'type'=>$type,'mes'=>$mes,'name'=>$userinfo['nickName'],'mes1'=>'联系客服回复：1','mes2'=>'全天客服回复：2')); //  响应json串
             } else {
                 logging_run('decryptData:'.$errCode.PHP_EOL);
             }
