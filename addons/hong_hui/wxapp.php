@@ -4,6 +4,9 @@
  * [WeEngine System] Copyright (c) 2013 WE7.CC
  */
 defined('IN_IA') or exit('Access Denied');
+include_once('wxBizDataCrypt.php');
+include_once('errorCode.php');
+
 class Hong_huiModuleWxapp extends WeModuleWxapp {
     //public $token = 'we7_testhooktoken'; //接口通信token
     public function doPageIndex() { // 接口一个名为"index"的接口
