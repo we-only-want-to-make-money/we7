@@ -12,20 +12,21 @@ $dos = array('openid', 'userinfo', 'check');
 $do = in_array($do, $dos) ? $do : 'openid';
 
 $account_api = WeAccount::createByUniacid();
-
+load()->func('logging');
+logging_run('授权登录:'.json_encode($_GPC));
 if ($do == 'openid') {
-	
+
 	$code = $_GPC['code'];
 	$openid = $_GPC['openid'];
-	
+
 	if (empty($openid) && !empty($_W['openid'])) {
 		$openid = $_W['openid'];
 	}
-	
+
 	if (empty($_W['account']['oauth']) || (empty($code) && empty($openid))) {
 		exit('通信错误，请在微信中重新发起请求');
 	}
-	
+
 	if (!empty($openid)) {
 		$_SESSION['openid'] = $oauth['openid'];
 		$fans = mc_fansinfo($openid);
@@ -126,7 +127,7 @@ if ($do == 'openid') {
 			'headimgurl' => $userinfo['avatarUrl'],
 		))),
 	);
-	
+
 	$member = mc_fetch($fans['uid']);
 	if (!empty($member)) {
 		pdo_update('mc_members', array('nickname' => $userinfo['nickName'], 'avatar' => $userinfo['avatarUrl'], 'gender' => $userinfo['gender']), array('uid' => $fans['uid']));
