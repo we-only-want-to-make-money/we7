@@ -104,6 +104,8 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
     public function doPageCheck(){
         load()->func('logging');
         logging_run('openid:'.$_SESSION['openid']);
+        logging_run('_SESSION:'.json_encode($_SESSION));
+
         $this->result(0, '', array('status'=>'success')); //  响应json串
 
     }
