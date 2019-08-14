@@ -116,7 +116,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
                 }elseif($freetimes<5){
                     logging_run('check:'."2");
                     $fans_redbook_vip_update=['freetimes'=>$freetimes+1];
-                    pdo_update('fans_redbook_vip', $fans_redbook_vip_update, array('uid' => $_SESSION['fanid']));
+                    pdo_update('fans_redbook_vip', $fans_redbook_vip_update, array('uid' => $_SESSION['uid']));
                     $this->result(0, '', array('status'=>'success')); //  响应json串
                 }else{
                     logging_run('check:'."3");
