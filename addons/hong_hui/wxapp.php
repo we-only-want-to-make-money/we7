@@ -171,9 +171,9 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
                     $freetimes=$result['freetimes'];
                     $exprietime=$result['exprietime'];
                     $exprieDate=date("Y-m-d ", $exprietime);
-                    if($type==2){
+                    if($type==1){
                         $mes=$exprieDate;
-                    }else if($type==1){
+                    }else if($type==2){
                         $mes=$freetimes;
                     }
                 }
