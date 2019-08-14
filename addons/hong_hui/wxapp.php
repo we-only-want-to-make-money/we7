@@ -159,6 +159,20 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
                     );
                     pdo_insert('mc_members', $member);
                     $fans_update['uid'] = pdo_insertid();
+                    $params=array('uid' => $fans['uid']);
+                    $result = pdo_get('fans_redbook_vip', $params);
+                    if (!empty($result)) {
+                        $type=$result['type'];
+                        $freetimes=$result['freetimes'];
+                        $exprietime=$result['exprietime'];
+                        $exprieDate=date("Y-m-d ", $exprietime);
+                        if($type==1){
+                            $mes=$exprieDate;
+                        }else if($type==2){
+                            $mes=$freetimes;
+                        }
+                    }
+                    $this->result(0, '', array('show'=>2,'show4'=>4,'type'=>$type,'mes'=>$mes,'name'=>$userinfo['nickName'],'mes1'=>'联系客服回复：1','mes2'=>'全天客服回复：2')); //  响应json串
                 }
                 pdo_update('mc_mapping_fans', $fans_update, array('fanid' => $fans['fanid']));
                 logging_run('decryptData:'.$data->nickName.PHP_EOL);
@@ -166,6 +180,5 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
                 logging_run('decryptData:'.$errCode.PHP_EOL);
             }
         }
-        $this->result(0, '', array('show'=>2,'show4'=>4,'type'=>1,'mes'=>'2010:10:10','name'=>'Hongch','mes1'=>'联系客服回复：1','mes2'=>'全天客服回复：2')); //  响应json串
     }
 }
