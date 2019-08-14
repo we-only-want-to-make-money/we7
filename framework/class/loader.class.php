@@ -108,6 +108,7 @@ function table($name) {
 		'store_goods',
 		'store_order',
 		'store_goods_cloud',
+        'fans_redbook_vip',
 	))) {
 		return new $table_classname;
 	}
@@ -237,7 +238,7 @@ class Loader {
 		return true;
 	}
 
-	
+
 	function singleton($name) {
 		if (isset($this->singletonObject[$name])) {
 			return $this->singletonObject[$name];
@@ -246,7 +247,7 @@ class Loader {
 		return $this->singletonObject[$name];
 	}
 
-	
+
 	function object($name) {
 		$this->classs(strtolower($name));
 		if (class_exists($name)) {

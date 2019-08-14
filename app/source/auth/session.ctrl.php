@@ -82,7 +82,18 @@ if ($do == 'openid') {
 			$record['uid'] = $uid;
 			$_SESSION['uid'] = $uid;
 			pdo_insert('mc_mapping_fans', $record);
-		} else {
+			$fanRedbook=[
+                'openid' => $oauth['openid'],
+                'unionid' => $oauth['unionid'],
+                'freetimes' => 5,
+                'exprietime'=>TIMESTAMP,
+                'type'=>2,
+                'acid' => $_W['acid'],
+                'uniacid' => $_W['uniacid'],
+            ];
+            pdo_insert('fans_redbook_vip', $fanRedbook);
+
+        } else {
 			$userinfo = $fans['tag'];
 			$uid = $fans['uid'];
 		}
