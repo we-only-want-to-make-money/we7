@@ -93,7 +93,7 @@ function requestAsHttpPOST($data, $service_url){
 		)
 	);
 	$context = stream_context_create($options);
-	logging_run('context:'.$context."   service_url:".$service_url);
+	logging_run('context:'.json_encode($options)."   service_url:".$service_url);
 
 	$result = file_get_contents($service_url, false, $context);
 	return $result;
