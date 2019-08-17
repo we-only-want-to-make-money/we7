@@ -245,6 +245,8 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         logging_run('doPagePay');
 
         $head["appId"]         =appId;//合作方标识
+        logging_run('appId');
+
         $head["random"]         =random;//随机数
         $head["merchantCode"]       ="EW_N4130797151";//门店编号
         $head["outTradeNo"]            = "EW_N4267159134_a1a11111a1"; //商户订单号由商户生成的该笔交易的全局唯一ID，商户需确保其唯一性，重新发起一笔支付要使用原订单号，避免重复支付。后续可通过该ID查询对应订单信息。 建议值：公司简称+门店编号+时间戳+序列 支持8-64位数字、英文字母、“-”及“_”，其他字符不支持
