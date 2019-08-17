@@ -282,6 +282,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $head["subAppId"]            = "wxd678efh567hg6787"; //微信分配的小程序APPID，仅微信交易有效
         $sign=createSign($head,key);
         $head["sign"]         =$sign;
+        logging_run('before：');
 
         $resp                        = requestAsHttpPOST($head, submit_url_precreate); //发送请求
         logging_run('resp：',json_encode($resp));
