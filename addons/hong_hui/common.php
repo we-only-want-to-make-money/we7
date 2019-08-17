@@ -11,9 +11,6 @@
 	 * return 生成的签名
 	 */
 	function createSign($paras,$key){
-		load()->func('logging');
-		logging_run('createSign1111111');
-
 		$sort_array = array_sort(array_filter($paras));				//删除数组中的空值并排序
     	$prestr = create_linkstring($sort_array);     				//把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
     	$prestr = $prestr.$key;										//把拼接后的字符串再与安全校验码直接连接起来
@@ -55,15 +52,23 @@
 	 */
 	function sign($prestr,$sign_type) {
 	    $sign='';
+		load()->func('logging');
+		logging_run('createSign1111111');
 	    if($sign_type == 'MD5') {
-	        $sign = md5($prestr);									//MD5加密
+			logging_run('MD5');
+			$sign = md5($prestr);									//MD5加密
 	    }elseif($sign_type =='DSA') {
-	        //DSA 签名方法待后续开发
+			logging_run('DSA');
+
+			//DSA 签名方法待后续开发
 	        die("DSA 签名方法待后续开发，请先使用MD5签名方式");
 	    }elseif($sign_type == ""){
-	    	die("sign_type为空，请设置sign_type");
+			logging_run('sign_type为空');
+			die("sign_type为空，请设置sign_type");
 	    }else {
-	        die("暂不支持".$sign_type."类型的签名方式");
+			logging_run('暂不支持');
+
+			die("暂不支持".$sign_type."类型的签名方式");
 	    }
 	    return strtolower($sign);									//返回参数并小写
 	}
