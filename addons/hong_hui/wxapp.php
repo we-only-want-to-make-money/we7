@@ -245,8 +245,6 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         logging_run('doPagePay');
 
         $head["appId"]         =appId;//合作方标识
-        logging_run('appId');
-
         $head["random"]         =random;//随机数
         $head["merchantCode"]       ="EW_N4130797151";//门店编号
         $head["outTradeNo"]            = "EW_N4267159134_a1a11111a1"; //商户订单号由商户生成的该笔交易的全局唯一ID，商户需确保其唯一性，重新发起一笔支付要使用原订单号，避免重复支付。后续可通过该ID查询对应订单信息。 建议值：公司简称+门店编号+时间戳+序列 支持8-64位数字、英文字母、“-”及“_”，其他字符不支持
@@ -282,7 +280,11 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
          */
         $head["openId"]            = "oLNmRjrZe5hqTd0eXMvZQTUBjR94"; //消费者用户标识，openid和appid必须匹配
         $head["subAppId"]            = "wxd678efh567hg6787"; //微信分配的小程序APPID，仅微信交易有效
+        logging_run('createSign1');
+
         $sign=createSign($head,key);
+        logging_run('createSign2');
+
         $head["sign"]         =$sign;
         logging_run('before：');
 
