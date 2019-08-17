@@ -283,5 +283,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
 
         $resp                        = requestAsHttpPOST($head, submit_url_precreate); //发送请求
         logging_run('doPagePay',json_encode($resp));
+        return                 $this->result(0, '', $resp); //  响应json串
+
     }
 }
