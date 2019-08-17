@@ -240,7 +240,11 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $content='"<p style="text-align: center;"><span style="background-color: rgb(238, 236, 225); color: rgb(255, 0, 0);">第一步。在小红书app点击右上角三个点，然后点复制链接</span></p><p style="text-align: center;"><img src="http://honghui.noeon.cn/attachment/images/3/2018/08/BbmmQkkgkbvR9kprV6CgkV9pGzXxQo.jpg" width="231" alt="微信图片_20180801151148.jpg" height="411" style="width: 231px; height: 411px;"/></p><p style="text-align: center;"><span style="color: rgb(255, 0, 0); background-color: rgb(238, 236, 225);">第二步。进入红薯库小程序，点击确定复制链接</span></p><p style="text-align: center;"><img src="http://honghui.noeon.cn/attachment/images/3/2018/08/aFicIKwItofpiVK9oiVPIooPFfOVW9.jpg" width="225" alt="微信图片_20180801151203.jpg" height="381" style="width: 225px; height: 381px;"/></p><p style="text-align: center;"><span style="color: rgb(255, 0, 0); background-color: rgb(238, 236, 225);">第三步 点击获取图片</span></p><p style="text-align: center;"><img src="http://honghui.noeon.cn/attachment/images/3/2018/08/VN3RbhVm096M330md8381u59h3f3RM.png" width="246" alt="微信图片_20180801151207.png" height="479" style="width: 246px; height: 479px;"/></p><p style="text-align: center;"><span style="color: rgb(255, 0, 0); background-color: rgb(238, 236, 225);">第四步 点击保存图片至相册</span></p><p style="text-align: center;"><img src="http://honghui.noeon.cn/attachment/images/3/2018/08/RFFgVihi2NllgVc44Z3ZCgXCFfHCcg.jpg" width="299" alt="微信图片_20180801151214.jpg" height="511" style="width: 299px; height: 511px;"/></p><p style="text-align: center;"><span style="color: rgb(255, 0, 0); background-color: rgb(238, 236, 225);">第五步  在相册中查看</span></p><p style="text-align: center;"><img src="http://honghui.noeon.cn/attachment/images/3/2018/08/KDpZr4CGVZ7v5CBJPVVmJ5mGqQ76U7.jpg" width="289" alt="微信图片_20180801151218.jpg" height="497" style="width: 289px; height: 497px;"/></p><p><br/></p>"';
         $this->result(0, '', array('wx'=>'18767135653','content'=>$content)); //  响应json串
     }
+    public function createPreRecord($table,$params){
+        pdo_insert($table, $params);
+    }
     public function doPagePay(){
+        global  $_GPC,$_W;
         load()->func('logging');
         logging_run('doPagePay');
 
@@ -274,10 +278,25 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $sign=createSign($head,key);
 
         $head["sign"]         =$sign;
-
+        $chargedoc = array(
+            'uniacid' => $_W['uniacid'],
+            'uid' => $_SESSION['uid'],
+            'openid'=>$_SESSION['openid'],
+            'createtime' => TIMESTAMP,
+            'transid' => $head["outTradeNo"],
+            'fee' => $head["totalAmount"],
+            'type' => 'weixin',
+            'status' => 0,
+            'updatetime' => TIMESTAMP,
+        );
+        $this->createPreRecord('mc_vip_recharge',$chargedoc);
         $resp                        = requestAsHttpPOST($head, submit_url_precreate); //发送请求
         logging_run('resp：',json_encode($resp));
+
         return                 $this->result(0, '', $resp); //  响应json串
+
+    }
+    public function doPageNotify(){
 
     }
 }
