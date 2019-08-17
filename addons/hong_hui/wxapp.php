@@ -242,6 +242,8 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
     }
     public function doPagePay(){
         load()->func('logging');
+        logging_run('doPagePay');
+
         $head["appId"]         =appId;//合作方标识
         $head["random"]         =random;//随机数
         $head["merchantCode"]       ="EW_N4130797151";//门店编号
@@ -282,7 +284,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $head["sign"]         =$sign;
 
         $resp                        = requestAsHttpPOST($head, submit_url_precreate); //发送请求
-        logging_run('doPagePay',json_encode($resp));
+        logging_run('resp：',json_encode($resp));
         return                 $this->result(0, '', $resp); //  响应json串
 
     }
