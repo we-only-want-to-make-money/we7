@@ -80,6 +80,7 @@ function sign($prestr,$sign_type) {
 
 
 function requestAsHttpPOST($data, $service_url){
+	load()->func('logging');
 	$HTTP_TIME_OUT= "20";
 	$http_data = array_sort(array_filter($data)); //删除数组中的空值并排序
 	$post_data = http_build_query($http_data);
@@ -92,6 +93,8 @@ function requestAsHttpPOST($data, $service_url){
 		)
 	);
 	$context = stream_context_create($options);
+	logging_run('context:'.$context."   service_url:".$service_url);
+
 	$result = file_get_contents($service_url, false, $context);
 	return $result;
 }

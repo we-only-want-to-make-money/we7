@@ -253,18 +253,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $head["notifyUrl"]            = "http://www.baidu.com"; //异步通知地址
         $head["subject"]            = "测试订单1"; //支付凭证商品描述信息，不填写默认为交易订单编号
 
-        /*goodsId     商品编码   对接商户传递的自己业务体系的商品编码
-          goodsName   商品名称  对接商户传递的自己业务体系的商品名称
-          price       商品单价(元)  对接商户传递的自己业务体系的商品单价
-          quantity    商品数量(必须填写正整数)  对接商户传递的自己业务体系的商品数量
-          核销注意：
-          要实现单品优惠核销支付时，必须传商品明细，否则核销不掉单品优惠卷！！！
-          如果传了，那么官方微信支付，口碑以及商家营销后台发的单品卷就能核销！！
-          仅配置相应通道，不用做多次开发！！
-        */
-        $goodsDetail[]= array('goodsId' => 'EW_N4130797151','goodsName'=> '可乐','price'=> '3','quantity'=> '5');
-        $goodsDetail[]= array('goodsId' => 'EW_N4130797159','goodsName'=> '雪碧','price'=> '4','quantity'=> '9');
-        $head["goodsDetail"] =json_encode($goodsDetail);
+
         /*
         1.支付宝支付时，要求上送用户在支付宝唯一用户号user_id，获取流程:
         https://docs.open.alipay.com/220/105337
@@ -281,13 +270,10 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $head["subAppId"]            = "wxd678efh567hg6787"; //微信分配的小程序APPID，仅微信交易有效
         $head["outTradeNo"]            ="XS-".$head["openId"].'-'. round(microtime(true) * 1000); //商户订单号由商户生成的该笔交易的全局唯一ID，商户需确保其唯一性，重新发起一笔支付要使用原订单号，避免重复支付。后续可通过该ID查询对应订单信息。 建议值：公司简称+门店编号+时间戳+序列 支持8-64位数字、英文字母、“-”及“_”，其他字符不支持
 
-        logging_run('createSign1');
 
         $sign=createSign($head,key);
-        logging_run('createSign2');
 
         $head["sign"]         =$sign;
-        logging_run('before：');
 
         $resp                        = requestAsHttpPOST($head, submit_url_precreate); //发送请求
         logging_run('resp：',json_encode($resp));
