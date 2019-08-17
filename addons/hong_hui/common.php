@@ -11,6 +11,9 @@
 	 * return 生成的签名
 	 */
 	function createSign($paras,$key){
+		load()->func('logging');
+		logging_run('createSign1111111');
+
 		$sort_array = array_sort(array_filter($paras));				//删除数组中的空值并排序
     	$prestr = create_linkstring($sort_array);     				//把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
     	$prestr = $prestr.$key;										//把拼接后的字符串再与安全校验码直接连接起来
