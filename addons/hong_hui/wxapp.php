@@ -7,6 +7,23 @@ defined('IN_IA') or exit('Access Denied');
 include_once('wxBizDataCrypt.php');
 include_once('errorCode.php');
 
+require_once("common.php");
+define("appId", "EW_N5946005323");
+define("key", "f0329e22fb506a4e26ccb29b0a6c5af3");
+define("input_charset", "UTF-8");
+define("sign_type", "MD5");
+define("random", "liantuo123");
+define("submit_url_login", "http://api.liantuofu.com/open/login");
+define("submit_url_merchant_list", "http://api.liantuofu.com/open/merchant/list");
+define("submit_url_pay", "http://api.liantuofu.com/open/pay");
+define("submit_url_precreate", "http://api.liantuofu.com/open/precreate");
+define("submit_url_pay_query", "http://api.liantuofu.com/open/pay/query");
+define("submit_url_close", "http://api.liantuofu.com/open/close");
+define("submit_url_refund", "http://api.liantuofu.com/open/refund");
+define("submit_url_refund_query", "http://api.liantuofu.com/open/refund/query");
+define("submit_url_bill", "http://api.liantuofu.com/open/bill");
+define("submit_url_jspay", "http://api.liantuofu.com/open/jspay");
+
 class Hong_huiModuleWxapp extends WeModuleWxapp {
     //public $token = 'we7_testhooktoken'; //接口通信token
     public function doPageIndex() { // 接口一个名为"index"的接口
@@ -222,6 +239,49 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         global  $_GPC,$_W;
         $content='"<p style="text-align: center;"><span style="background-color: rgb(238, 236, 225); color: rgb(255, 0, 0);">第一步。在小红书app点击右上角三个点，然后点复制链接</span></p><p style="text-align: center;"><img src="http://honghui.noeon.cn/attachment/images/3/2018/08/BbmmQkkgkbvR9kprV6CgkV9pGzXxQo.jpg" width="231" alt="微信图片_20180801151148.jpg" height="411" style="width: 231px; height: 411px;"/></p><p style="text-align: center;"><span style="color: rgb(255, 0, 0); background-color: rgb(238, 236, 225);">第二步。进入红薯库小程序，点击确定复制链接</span></p><p style="text-align: center;"><img src="http://honghui.noeon.cn/attachment/images/3/2018/08/aFicIKwItofpiVK9oiVPIooPFfOVW9.jpg" width="225" alt="微信图片_20180801151203.jpg" height="381" style="width: 225px; height: 381px;"/></p><p style="text-align: center;"><span style="color: rgb(255, 0, 0); background-color: rgb(238, 236, 225);">第三步 点击获取图片</span></p><p style="text-align: center;"><img src="http://honghui.noeon.cn/attachment/images/3/2018/08/VN3RbhVm096M330md8381u59h3f3RM.png" width="246" alt="微信图片_20180801151207.png" height="479" style="width: 246px; height: 479px;"/></p><p style="text-align: center;"><span style="color: rgb(255, 0, 0); background-color: rgb(238, 236, 225);">第四步 点击保存图片至相册</span></p><p style="text-align: center;"><img src="http://honghui.noeon.cn/attachment/images/3/2018/08/RFFgVihi2NllgVc44Z3ZCgXCFfHCcg.jpg" width="299" alt="微信图片_20180801151214.jpg" height="511" style="width: 299px; height: 511px;"/></p><p style="text-align: center;"><span style="color: rgb(255, 0, 0); background-color: rgb(238, 236, 225);">第五步  在相册中查看</span></p><p style="text-align: center;"><img src="http://honghui.noeon.cn/attachment/images/3/2018/08/KDpZr4CGVZ7v5CBJPVVmJ5mGqQ76U7.jpg" width="289" alt="微信图片_20180801151218.jpg" height="497" style="width: 289px; height: 497px;"/></p><p><br/></p>"';
         $this->result(0, '', array('wx'=>'18767135653','content'=>$content)); //  响应json串
+    }
+    public function doPagePay(){
+        load()->func('logging');
+        $head["appId"]         =appId;//合作方标识
+        $head["random"]         =random;//随机数
+        $head["merchantCode"]       ="EW_N4130797151";//门店编号
+        $head["outTradeNo"]            = "EW_N4267159134_a1a11111a1"; //商户订单号由商户生成的该笔交易的全局唯一ID，商户需确保其唯一性，重新发起一笔支付要使用原订单号，避免重复支付。后续可通过该ID查询对应订单信息。 建议值：公司简称+门店编号+时间戳+序列 支持8-64位数字、英文字母、“-”及“_”，其他字符不支持
+        $head["totalAmount"]            ="0.01";//订单总金额，单位为元，精确到小数点后两位，取值范围[0.01至100000000]
+        $head["channel"]            = "WXPAY";//支付渠道  支付宝 WXPAY:微信 ALIPAY:支付宝
+        $head["tradeType"]            = "MINIAPP"; //支付交易类型 指定该笔支付将使用的第三方支付渠道交易类型： MINIAPP:小程序支付
+        $head["notifyUrl"]            = "http://www.baidu.com"; //异步通知地址
+        $head["subject"]            = "测试订单1"; //支付凭证商品描述信息，不填写默认为交易订单编号
 
+        /*goodsId     商品编码   对接商户传递的自己业务体系的商品编码
+          goodsName   商品名称  对接商户传递的自己业务体系的商品名称
+          price       商品单价(元)  对接商户传递的自己业务体系的商品单价
+          quantity    商品数量(必须填写正整数)  对接商户传递的自己业务体系的商品数量
+          核销注意：
+          要实现单品优惠核销支付时，必须传商品明细，否则核销不掉单品优惠卷！！！
+          如果传了，那么官方微信支付，口碑以及商家营销后台发的单品卷就能核销！！
+          仅配置相应通道，不用做多次开发！！
+        */
+        $goodsDetail[]= array('goodsId' => 'EW_N4130797151','goodsName'=> '可乐','price'=> '3','quantity'=> '5');
+        $goodsDetail[]= array('goodsId' => 'EW_N4130797159','goodsName'=> '雪碧','price'=> '4','quantity'=> '9');
+        $head["goodsDetail"] =json_encode($goodsDetail);
+        /*
+        1.支付宝支付时，要求上送用户在支付宝唯一用户号user_id，获取流程:
+        https://docs.open.alipay.com/220/105337
+        2.微信支付时，要求上送用户在商户subAppid下唯一标识openid，获取流程
+        https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1445241432
+        3.本接口主要针对商户使用联拓富平台公众账号进行支付的用户，通过该接口获取到支付所需要的openid。
+        具体流程和步骤如下：
+        http://api.liantuofu.com/open/wechatUserAuth?merchantCode={merchantCode}&redirectUri={redirectUri}
+        用户扫码打开链接，跳转微信授权会自动完成获取openId，获取成功后会跳转至redirectUri，并在目标url后方拼接openId
+        例如：http://api.liantuofu.com/open/wechatUserAuth?merchantCode=ABC&redirectUri=http://www.qq.com
+        获取openId成功后，跳转链接：http://www.qq.com?openId=xxxxxxxxxxx,从而获取openid
+         */
+        $head["openId"]            = "oLNmRjrZe5hqTd0eXMvZQTUBjR94"; //消费者用户标识，openid和appid必须匹配
+        $head["subAppId"]            = "wxd678efh567hg6787"; //微信分配的小程序APPID，仅微信交易有效
+        $sign=createSign($head,key);
+        $head["sign"]         =$sign;
+
+        $resp                        = requestAsHttpPOST($head, submit_url_precreate); //发送请求
+        logging_run('doPagePay',json_encode($resp));
     }
 }
