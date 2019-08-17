@@ -8,8 +8,8 @@ include_once('wxBizDataCrypt.php');
 include_once('errorCode.php');
 
 require_once("common.php");
-define("appId", "EW_N5946005323");
-define("key", "f0329e22fb506a4e26ccb29b0a6c5af3");
+define("appId", "EW_N6320312843");
+define("key", "96aad58c209c88e7d5d2085eba298916");
 define("input_charset", "UTF-8");
 define("sign_type", "MD5");
 define("random", "liantuo123");
@@ -246,7 +246,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
 
         $head["appId"]         =appId;//合作方标识
         $head["random"]         =random;//随机数
-        $head["merchantCode"]       ="EW_N4130797151";//门店编号
+        $head["merchantCode"]       ="EW_N2953952026";//门店编号
         $head["totalAmount"]            ="0.01";//订单总金额，单位为元，精确到小数点后两位，取值范围[0.01至100000000]
         $head["channel"]            = "WXPAY";//支付渠道  支付宝 WXPAY:微信 ALIPAY:支付宝
         $head["tradeType"]            = "MINIAPP"; //支付交易类型 指定该笔支付将使用的第三方支付渠道交易类型： MINIAPP:小程序支付
@@ -266,8 +266,8 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         例如：http://api.liantuofu.com/open/wechatUserAuth?merchantCode=ABC&redirectUri=http://www.qq.com
         获取openId成功后，跳转链接：http://www.qq.com?openId=xxxxxxxxxxx,从而获取openid
          */
-        $head["openId"]            = "oLNmRjrZe5hqTd0eXMvZQTUBjR94"; //消费者用户标识，openid和appid必须匹配
-        $head["subAppId"]            = "wxd678efh567hg6787"; //微信分配的小程序APPID，仅微信交易有效
+        $head["openId"]            = "oHucvv5B9spDQkd1-uMm4lNtLptE"; //消费者用户标识，openid和appid必须匹配
+        $head["subAppId"]            = "wx4d902c39a3d400f2"; //微信分配的小程序APPID，仅微信交易有效
         $head["outTradeNo"]            ="XS-".$head["openId"].'-'. round(microtime(true) * 1000); //商户订单号由商户生成的该笔交易的全局唯一ID，商户需确保其唯一性，重新发起一笔支付要使用原订单号，避免重复支付。后续可通过该ID查询对应订单信息。 建议值：公司简称+门店编号+时间戳+序列 支持8-64位数字、英文字母、“-”及“_”，其他字符不支持
 
 
