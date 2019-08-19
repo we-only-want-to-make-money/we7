@@ -251,7 +251,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $head["appId"]         =appId;//合作方标识
         $head["random"]         =random;//随机数
         $head["merchantCode"]       ="EW_N0244013486";//门店编号
-        $head["totalAmount"]            ="0.01";//订单总金额，单位为元，精确到小数点后两位，取值范围[0.01至100000000]
+        $head["totalAmount"]            =$_GPC['amount'];//"0.01";//订单总金额，单位为元，精确到小数点后两位，取值范围[0.01至100000000]
         $head["channel"]            = "WXPAY";//支付渠道  支付宝 WXPAY:微信 ALIPAY:支付宝
         $head["tradeType"]            = "MINIAPP"; //支付交易类型 指定该笔支付将使用的第三方支付渠道交易类型： MINIAPP:小程序支付
         $head["notifyUrl"]            = "http://www.baidu.com"; //异步通知地址
