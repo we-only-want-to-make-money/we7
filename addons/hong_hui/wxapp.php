@@ -157,6 +157,14 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
         $this->result(0, '', array('status'=>'success')); //  响应json串
 
     }
+    public function doPageInvite(){
+        global  $_GPC,$_W;
+        load()->func('logging');
+        logging_run('doPageInvite');
+        $fans_redbook_vip_update=['inviteuid'=>$_GPC['inviteCode']];
+        pdo_update('fans_redbook_vip', $fans_redbook_vip_update, array('uid' => $_SESSION['uid']));
+        $this->result(0, '', array('status'=>'success')); //  响应json串
+    }
     public function doPageunionid(){
         global  $_GPC,$_W;
         $type=2;
