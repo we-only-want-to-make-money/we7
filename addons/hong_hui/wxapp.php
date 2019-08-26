@@ -132,7 +132,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
                     $this->result(0, '', array('status'=>'success')); //  响应json串
                 }elseif($freetimes<5){
                     logging_run('check:'."2");
-                    $fans_redbook_vip_update=['freetimes'=>$freetimes+1];
+                    $fans_redbook_vip_update=['freetimes'=>$freetimes+1,'updatetime'=>strtotime(date("Y-m-d"),time())];
                     pdo_update('fans_redbook_vip', $fans_redbook_vip_update, array('uid' => $_SESSION['uid']));
                     $this->result(0, '', array('status'=>'success')); //  响应json串
                 }else{
@@ -142,7 +142,7 @@ class Hong_huiModuleWxapp extends WeModuleWxapp {
             }else if($type==2){
                 if($freetimes<5){
                     logging_run('check:'."4");
-                    $fans_redbook_vip_update=['freetimes'=>$freetimes+1];
+                    $fans_redbook_vip_update=['freetimes'=>$freetimes+1,'updatetime'=>strtotime(date("Y-m-d"),time())];
                     pdo_update('fans_redbook_vip', $fans_redbook_vip_update, array('uid' => $_SESSION['uid']));
 
                     $this->result(0, '', array('status'=>'success')); //  响应json串
