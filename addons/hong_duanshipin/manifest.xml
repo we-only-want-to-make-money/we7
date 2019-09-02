@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.6">
+    <application setting="false">
+        <name><![CDATA[hong_duanshipin测试模块]]></name>
+        <identifie><![CDATA[hong_duanshipin]]></identifie>
+        <version><![CDATA[1.0]]></version>
+        <type><![CDATA[business]]></type>
+        <ability><![CDATA[BJ测试模块]]></ability>
+        <description><![CDATA[BJ测试模块]]></description>
+        <author><![CDATA[BJ测试模块]]></author>
+        <url><![CDATA[]]></url>
+    </application>
+    <platform>
+        <subscribes>
+            <message type="subscribe" />
+        </subscribes>
+        <handles>
+            <message type="text" />
+        </handles>
+        <rule embed="true" />
+    </platform>
+    <bindings>
+        <cover>
+            <entry title="登录" do="Login" />
+        </cover>
+        <menu>
+            <entry title="登录" do="Login" />
+        </menu>
+    </bindings>
+    <install></install>
+    <uninstall></uninstall>
+    <upgrade></upgrade>
+</manifest>
