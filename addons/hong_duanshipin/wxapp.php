@@ -35,7 +35,11 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
             'url'=>'https://weixin.gamesxh.com/attachment/'
         ];
         return         $this->result(0, '', $data);
-
     }
-
+    public function doPageQuery(){
+        global  $_GPC,$_W;
+        load()->func('logging');
+        logging_run('doPageVideo:'.json_encode($_GPC));
+        
+    }
 }
