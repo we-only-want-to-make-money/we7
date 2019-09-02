@@ -9,7 +9,6 @@ defined('IN_IA') or exit('Access Denied');
 class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
     //public $token = 'we7_testhooktoken'; //接口通信token
     public function doPageIndex() { // 接口一个名为"index"的接口
-        $this->result(0, '', array('test' => 1235)); //  响应json串
         $data=[
             'index'=>[
                 'ad_id'=> "adunit-d062798d85388a15",
