@@ -12,12 +12,12 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
         $data=[
             'index'=>[
                 'ad_id'=> "adunit-d062798d85388a15",
-                'adimg'=> "images/2/2019/06/Ne30FUaF3AEESfYSFG0yeeuoos3o48.jpg",
-                'adtext'=> "加入Q群或分享好友可获得更多次数！",
+                'adimg'=> "images/duanshipin/banner.jpg",
+                'adtext'=> "全网最全免费短视频去水印工具！",
                 'api_url'=> "https://weixin.gamesxh.com/addons/tommie_duanshiping/down.php?url=",
                 'app_name'=> "抖去水印",
                 'copytext'=> "QQ群：760880531",
-                'description'=> "抖去支持抖音、快手、头条、皮皮虾、微视、全民小视频、火山、西瓜视频、映客、陌陌等解析。",
+                'description'=> "支持抖音、快手、头条、皮皮虾、微视、全民小视频、火山、西瓜视频、映客、陌陌等解析去水印。",
                 'help_url'=> "",
                 'invite_award'=> "3",
                 'is_member'=> "1",
@@ -30,9 +30,9 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
                 'qq_num'=> "147373291",
                 'share_img'=> "https://weixin.gamesxh.com/attachment/images/2/2019/06/RJ3JkiYVcIX5K73Y4Cr57ZmJ75c5iI.jpg",
                 'share_title'=> "上热门秘籍，99.9%的网红都在用！",
-                'title'=> "增加次数或升级会员请加Q：20370266",
+                'title'=> "增加次数或升级会员请加Q：147373291",
             ],
-            'url'=>'https://weixin.gamesxh.com/attachment/'
+            'url'=>'https://www.91ye.top/attachment/'
         ];
         return         $this->result(0, '', $data);
     }
