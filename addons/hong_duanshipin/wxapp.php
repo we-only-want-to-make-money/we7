@@ -56,4 +56,29 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
         }
         $this->result(0, '', $inviterOpenid);
     }
+    public function doPageMember(){
+        global  $_GPC,$_W;
+        $params=array('uid' => $_W['member']['uid']);
+        $result = pdo_get('mc_mapping_fans', $params);
+
+        $data=[
+            'user'=>[
+                'headimg'=>$_W['member']['avatar'],
+                'nickname'=>$_W['member']['nickname'],
+            ],
+            'contact'=>[
+                'qq_num'=>'147373291',
+                'is_pay'=>'1',
+                'isAudit'=>'1',
+                'isMember'=>'1',
+                'num'=>$_W['member']['num'],
+                'date'=>$_W['member']['date'],
+                'onpayenter'=>'0',
+                'inviteaward'=>'5',
+                'helpUrl'=>'',
+                'qq_group'=>'123',
+                'inviteuum'=>$result['inviteuum']
+            ]
+        ];
+    }
 }
