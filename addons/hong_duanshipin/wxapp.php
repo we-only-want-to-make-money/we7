@@ -40,7 +40,7 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
         global  $_GPC,$_W;
         $link=$_GPC['url'];
         load()->func('logging');
-        logging_run('doPageVideo:'.json_encode($_GPC));
+        logging_run('doPageQuery:'.json_encode($_GPC));
         //配置信息
         $iiiLabVideoDownloadURL = "http://service.iiilab.com/video/download";   //iiiLab通用视频解析接口
         $client = "7fb57db574e461fb";;   //iiiLab分配的客户ID
@@ -51,6 +51,8 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
         $timestamp = time() * 1000;
         $sign = md5($link . $timestamp . $clientSecretKey);
         $data = $this->file_get_contents_post($iiiLabVideoDownloadURL, array("link" => $link, "timestamp" => $timestamp, "sign" => $sign, "client" => $client));
+        logging_run('doPageQuery——$data:'.$data);
+
         $link_data = json_decode($data,true);
         if ($link_data['retCode'] != 200) {
             $this->result(1, '视频解析失败,请检查视频地址是否正确！', []);
