@@ -21,7 +21,7 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
                 'help_url'=> "",
                 'invite_award'=> "3",
                 'is_member'=> "1",
-                'is_pay'=> "1",
+                'is_pay'=> "0",
                 'isaudit'=> "1",
                 'mix_num'=> "3",
                 'onpayenter'=> "0",
