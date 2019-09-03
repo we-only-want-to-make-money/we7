@@ -39,7 +39,7 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
     public function doPageQuery(){
         global  $_GPC,$_W;
         $link=$_GPC['url'];
-        return  $this->result(1, '视频解析成功', ['downurl'=>"https://www.91ye.top/attachment/videos/220bbcf37ade188491a8eb533359a44147f1163554a000000fa6bc7580dc"]);
+        return  $this->result(0, '视频解析成功', ['downurl'=>"https://www.91ye.top/attachment/videos/220bbcf37ade188491a8eb533359a44147f1163554a000000fa6bc7580dc"]);
 
         logging_run('doPageQuery--$link:'.$link);
 
@@ -67,7 +67,7 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
             $fileName=$this->downFile($video,$path);
             $downurl=$_W['attachurl']."videos/".$fileName;
             logging_run('doPageQuery——$downurl:'.$downurl);
-            $this->result(1, '视频解析成功', ['downurl'=>$downurl]);
+            $this->result(0, '视频解析成功', ['downurl'=>$downurl]);
 
         }
 
