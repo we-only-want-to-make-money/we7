@@ -46,8 +46,9 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
         if($num<1){
             return  $this->result(2, '视频解析失败,解析次数已用完', []);
         }
+        pdo_update('mc_members', array(['num' => ($num-1).""]), array('uid' => $_W['member']['uid']));
 
-        //return  $this->result(0, '视频解析成功', ['downurl'=>"https://www.91ye.top/attachment/videos/220bbcf37ade188491a8eb533359a44147f1163554a000000fa6bc7580dc"]);
+        return  $this->result(0, '视频解析成功', ['downurl'=>"https://www.91ye.top/attachment/videos/220bbcf37ade188491a8eb533359a44147f1163554a000000fa6bc7580dc"]);
 
         logging_run('doPageQuery--$link:'.$link);
 
