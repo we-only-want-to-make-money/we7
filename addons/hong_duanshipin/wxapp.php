@@ -80,5 +80,7 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
                 'inviteuum'=>$result['inviteuum']
             ]
         ];
+        $this->result(0, '', $data);
+
     }
 }
