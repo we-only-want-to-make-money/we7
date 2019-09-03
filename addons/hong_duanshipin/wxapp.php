@@ -62,19 +62,19 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
         logging_run('doPageMember:'.json_encode($_W));
         $params=array('uid' => $_W['member']['uid']);
         $result = pdo_get('mc_mapping_fans', $params);
-
+        $member=pdo_get('mc_members', $params);
         $data=[
             'user'=>[
-                'headimg'=>$_W['member']['avatar'],
-                'nickname'=>$_W['member']['nickname'],
+                'headimg'=>$member['avatar'],
+                'nickname'=>$member['nickname'],
             ],
             'contact'=>[
                 'qq_num'=>'147373291',
                 'is_pay'=>'1',
                 'isAudit'=>'1',
                 'isMember'=>'1',
-                'num'=>$_W['member']['num'],
-                'date'=>$_W['member']['date'],
+                'num'=>$member['num'],
+                'date'=>$member['date'],
                 'onpayenter'=>'0',
                 'inviteaward'=>'5',
                 'helpUrl'=>'',
