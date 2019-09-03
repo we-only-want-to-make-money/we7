@@ -26,8 +26,8 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
                 'mix_num'=> "3",
                 'onpayenter'=> "0",
                 'progress'=> "1",
-                'qq_group'=> "760880531",
-                'qq_num'=> "20370266",
+                'qq_group'=> "12218265",
+                'qq_num'=> "147373291",
                 'share_img'=> "https://weixin.gamesxh.com/attachment/images/2/2019/06/RJ3JkiYVcIX5K73Y4Cr57ZmJ75c5iI.jpg",
                 'share_title'=> "上热门秘籍，99.9%的网红都在用！",
                 'title'=> "增加次数或升级会员请加Q：20370266",
@@ -39,7 +39,15 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
     public function doPageQuery(){
         global  $_GPC,$_W;
         $link=$_GPC['url'];
-        return  $this->result(0, '视频解析成功', ['downurl'=>"https://www.91ye.top/attachment/videos/220bbcf37ade188491a8eb533359a44147f1163554a000000fa6bc7580dc"]);
+        $params=array('uid' => $_W['member']['uid']);
+        $result = pdo_get('mc_mapping_fans', $params);
+        $member=pdo_get('mc_members', $params);
+        $num=$member['num'];
+        if($num<1){
+            return  $this->result(2, '视频解析失败,解析次数已用完', []);
+        }
+
+        //return  $this->result(0, '视频解析成功', ['downurl'=>"https://www.91ye.top/attachment/videos/220bbcf37ade188491a8eb533359a44147f1163554a000000fa6bc7580dc"]);
 
         logging_run('doPageQuery--$link:'.$link);
 
@@ -67,6 +75,8 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
             $fileName=$this->downFile($video,$path);
             $downurl=$_W['attachurl']."videos/".$fileName;
             logging_run('doPageQuery——$downurl:'.$downurl);
+            pdo_update('mc_members', array(['num' => $num-1]), array('uid' => $_W['member']['uid']));
+
             $this->result(0, '视频解析成功', ['downurl'=>$downurl]);
 
         }
@@ -129,7 +139,7 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
                 'onpayenter'=>'0',
                 'invite_award'=>'5',
                 'help_url'=>'',
-                'qq_group'=>'123',
+                'qq_group'=>'12218265',
             ]
         ];
         $this->result(0, '', $data);
