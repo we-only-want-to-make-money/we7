@@ -7,6 +7,8 @@
 defined('IN_IA') or exit('Access Denied');
 
 load()->model('miniapp');
+load()->func('logging');
+logging_run('wxapp.ctrl.php');
 
 if (strexists($_SERVER['HTTP_REFERER'], 'https://servicewechat.com/')) {
 	$referer_url = parse_url($_SERVER['HTTP_REFERER']);
@@ -25,8 +27,7 @@ if (!empty($_W['uniacid'])) {
 }
 $site = WeUtility::createModuleWxapp($entry['module']);
 $method = 'doPage' . ucfirst($entry['do']);
-load()->func('logging');
-logging_run('wxapp');
+logging_run('wxapp.ctrl1.php');
 
 if(!is_error($site)) {
 	$site->appid = $appid;
