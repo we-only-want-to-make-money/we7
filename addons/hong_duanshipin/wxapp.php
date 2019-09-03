@@ -15,7 +15,7 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
                 'adimg'=> "images/duanshipin/banner.jpg",
                 'adtext'=> "全网最全免费短视频去水印工具！",
                 'api_url'=> "https://weixin.gamesxh.com/addons/tommie_duanshiping/down.php?url=",
-                'app_name'=> "抖去水印",
+                'app_name'=> "快抖去水印小助手",
                 'copytext'=> "QQ群：12218265",
                 'description'=> "支持抖音、快手、头条、皮皮虾、微视、全民小视频、火山、西瓜视频、映客、陌陌等解析去水印。",
                 'help_url'=> "",
