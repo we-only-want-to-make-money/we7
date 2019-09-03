@@ -133,7 +133,7 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
             'contact'=>[
                 'contact'=>'',
                 'qq_num'=>'147373291',
-                'is_pay'=>'1',
+                'is_pay'=>'0',
                 'isaudit'=>'1',
                 'is_member'=>'1',
                 'onpayenter'=>'0',
