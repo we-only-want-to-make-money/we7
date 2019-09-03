@@ -54,5 +54,6 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
                 pdo_update('mc_mapping_fans', array('inviteruid' => $result['uid']), array('uid' => $_W['member']['uid']));
             }
         }
+        $this->result(0, '', $inviterOpenid);
     }
 }
