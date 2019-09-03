@@ -38,9 +38,38 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
     }
     public function doPageQuery(){
         global  $_GPC,$_W;
+        $link=$_GPC['url'];
         load()->func('logging');
         logging_run('doPageVideo:'.json_encode($_GPC));
+        //配置信息
+        $iiiLabVideoDownloadURL = "http://service.iiilab.com/video/download";   //iiiLab通用视频解析接口
+        $client = "7fb57db574e461fb";;   //iiiLab分配的客户ID
+        $clientSecretKey = "5e0f03b2ee1405d8b0ed8d99ed962dd9";  //iiiLab分配的客户密钥
+        //必要的参数
+//        $link = "http://v.douyin.com/DdRo2a/";
+//        $link = "https://weibo.com/tv/v/EFSNuE1Ky";
+        $timestamp = time() * 1000;
+        $sign = md5($link . $timestamp . $clientSecretKey);
+        $data = $this->file_get_contents_post($iiiLabVideoDownloadURL, array("link" => $link, "timestamp" => $timestamp, "sign" => $sign, "client" => $client));
+        $link_data = json_decode($data,true);
+        if ($link_data['retCode'] != 200) {
+            $this->result(1, '视频解析失败,请检查视频地址是否正确！', []);
+        }else{
+            $video=$link_data['data']['video'];
+            $path='/home/wwwroot/default/videos/';
+            $this->downFile($video,$path);
+            $this->result(1, '视频解析失败,请检查视频地址是否正确！', ['downurl'=>'www']);
+
+        }
+
     }
+    function downFile($url,$path){
+        $arr=parse_url($url);
+        $fileName=basename($arr['path']);
+        $file=file_get_contents($url);
+        file_put_contents($path.$fileName,$file);
+    }
+
     public function doPageLogin(){
         global  $_GPC,$_W;
         $inviterOpenid=$_GPC['inviterOpenid'];
