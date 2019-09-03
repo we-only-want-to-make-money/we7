@@ -40,6 +40,13 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
         global  $_GPC,$_W;
         load()->func('logging');
         logging_run('doPageVideo:'.json_encode($_GPC));
-        
+    }
+    public function doPageLogin(){
+        global  $_GPC,$_W;
+        $_GPC['inviterOpenid'];
+        load()->func('logging');
+        logging_run('doPageLogin_GPC:'.json_encode($_GPC));
+        logging_run('doPageLogin_W:'.json_encode($_W));
+
     }
 }
