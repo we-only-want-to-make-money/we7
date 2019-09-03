@@ -67,19 +67,20 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
             'user'=>[
                 'headimg'=>$member['avatar'],
                 'nickname'=>$member['nickname'],
+                'maximum'=>$member['num'],
             ],
+            'enddate'=>$member['date'],
+            'inviteuum'=>$result['inviteuum'],
             'contact'=>[
+                'contact'=>'',
                 'qq_num'=>'147373291',
                 'is_pay'=>'1',
-                'isAudit'=>'1',
-                'isMember'=>'1',
-                'num'=>$member['num'],
-                'date'=>$member['date'],
+                'isaudit'=>'1',
+                'is_member'=>'1',
                 'onpayenter'=>'0',
-                'inviteaward'=>'5',
-                'helpUrl'=>'',
+                'invite_award'=>'5',
+                'help_url'=>'',
                 'qq_group'=>'123',
-                'inviteuum'=>$result['inviteuum']
             ]
         ];
         $this->result(0, '', $data);
