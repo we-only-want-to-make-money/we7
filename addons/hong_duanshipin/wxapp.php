@@ -39,6 +39,8 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
     public function doPageQuery(){
         global  $_GPC,$_W;
         $link=$_GPC['url'];
+        logging_run('doPageQuery--$link:'.$link);
+
         load()->func('logging');
         logging_run('doPageQuery:'.json_encode($_GPC));
         //配置信息
