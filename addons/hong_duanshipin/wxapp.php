@@ -63,7 +63,7 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
             $path='/home/wwwroot/default/we7/attachment/videos/';
             logging_run('doPageQuery——$video:'.$video);
             $this->downFile($video,$path);
-            $this->result(1, '视频解析失败,请检查视频地址是否正确！', ['downurl'=>'www']);
+            $this->result(1, '视频解析成功', ['downurl'=>'www']);
 
         }
 
