@@ -58,6 +58,8 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
     }
     public function doPageMember(){
         global  $_GPC,$_W;
+        load()->func('logging');
+        logging_run('doPageMember:'.json_encode($_W));
         $params=array('uid' => $_W['member']['uid']);
         $result = pdo_get('mc_mapping_fans', $params);
 
