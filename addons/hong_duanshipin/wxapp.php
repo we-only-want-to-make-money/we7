@@ -43,10 +43,16 @@ class Hong_duanshipinModuleWxapp extends WeModuleWxapp {
     }
     public function doPageLogin(){
         global  $_GPC,$_W;
-        $_GPC['inviterOpenid'];
+        $inviterOpenid=$_GPC['inviterOpenid'];
         load()->func('logging');
         logging_run('doPageLogin_GPC:'.json_encode($_GPC));
         logging_run('doPageLogin_W:'.json_encode($_W));
-
+        if($inviterOpenid){
+            $params=array('openid' => $inviterOpenid);
+            $result = pdo_get('mc_mapping_fans', $params);
+            if (!empty($result)) {
+                pdo_update('mc_mapping_fans', array('inviteruid' => $result['uid']), array('uid' => $_W['member']['uid']));
+            }
+        }
     }
 }
